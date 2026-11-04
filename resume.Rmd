@@ -1,5 +1,14 @@
 ---
 title: "Resume"
+output:
+  html_document:
+    theme: flatly
+    highlight: textmate
+    css: styles.css
+    self_contained: false
+    lib_dir: site_libs
+    include:
+      after_body: footer.html
 ---
 
 <p class="eyebrow">ZHEMING BAO / EXPERIENCE &amp; EDUCATION</p>

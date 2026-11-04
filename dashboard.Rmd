@@ -1,0 +1,175 @@
+---
+title: "New York Weather | 2010"
+author: "Zheming Bao"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+    theme: flatly
+    self_contained: true
+    source_code: embed
+    navbar:
+      - title: "Home"
+        href: index.html
+        align: right
+      - title: "Resume"
+        href: resume.html
+        align: right
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(plotly)
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+data("ny_noaa", package = "p8105.datasets")
+
+# Retain one complete calendar year; raw temperatures and rain use tenths.
+weather = ny_noaa |>
+  filter(date >= as.Date("2010-01-01"), date <= as.Date("2010-12-31")) |>
+  transmute(
+    station = id,
+    date,
+    month = as.integer(format(date, "%m")),
+    tmin_c = as.numeric(tmin) / 10,
+    tmax_c = as.numeric(tmax) / 10,
+    precipitation_mm = prcp / 10
+  )
+
+# Exclude invalid pairs from temperature plots; keep usable unpaired maxima.
+invalid_pair = with(weather, !is.na(tmin_c) & !is.na(tmax_c) & tmin_c > tmax_c)
+temperature = weather |>
+  filter(!invalid_pair, !is.na(tmax_c))
+rain = weather |>
+  filter(!is.na(precipitation_mm), precipitation_mm >= 0)
+
+monthly_temperature = temperature |>
+  group_by(month) |>
+  summarize(mean_tmax_c = mean(tmax_c), records = n(), .groups = "drop")
+monthly_rain = rain |>
+  group_by(month) |>
+  summarize(mean_precipitation_mm = mean(precipitation_mm), records = n(),
+            .groups = "drop")
+
+temperature_pairs = temperature |>
+  filter(!is.na(tmin_c))
+set.seed(2367)
+scatter_data = temperature_pairs |>
+  slice_sample(n = min(2000L, nrow(temperature_pairs)))
+
+warmest_month = monthly_temperature$month[which.max(monthly_temperature$mean_tmax_c)]
+wettest_month = monthly_rain$month[which.max(monthly_rain$mean_precipitation_mm)]
+missing_tmax_pct = mean(is.na(weather$tmax_c)) * 100
+missing_rain_pct = mean(is.na(weather$precipitation_mm)) * 100
+
+# Confirm that every plotted month is represented and units are consistent.
+stopifnot(
+  identical(monthly_temperature$month, 1:12),
+  identical(monthly_rain$month, 1:12),
+  all(is.finite(monthly_temperature$mean_tmax_c)),
+  all(is.finite(monthly_rain$mean_precipitation_mm)),
+  all(scatter_data$tmin_c <= scatter_data$tmax_c),
+  nrow(scatter_data) <= 2000
+)
+
+plot_font = list(family = "Arial, sans-serif", size = 13, color = "#17352f")
+```
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+
+### A year of weather
+
+Explore seasonal temperature and precipitation patterns across New York State weather stations in **2010**.
+
+**`r format(nrow(weather), big.mark = ",")` station-day records** from **`r n_distinct(weather$station)` stations** are included before missing-value filtering. Each record describes one station on one day.
+
+### Read the charts
+
+- **Line:** monthly mean of observed daily maximum temperatures.
+- **Bar:** monthly mean of observed daily precipitation, including zero-rain days.
+- **Scatter:** daily minimum versus maximum temperature for a reproducible sample of `r nrow(scatter_data)` complete station-day pairs.
+
+Hover for details. Drag to zoom and double-click to reset. Plotly's toolbar provides additional controls.
+
+### Coverage & limitations
+
+Maximum temperature is missing in **`r sprintf("%.1f", missing_tmax_pct)`%** of records; precipitation is missing in **`r sprintf("%.1f", missing_rain_pct)`%**. Missing values are omitted separately for each chart, never replaced with zero. Temperature charts exclude **`r sum(invalid_pair)`** records where the minimum exceeds the maximum. Negative precipitation values are excluded.
+
+Monthly means weight every available station-day equally. Stations and observation coverage differ by variable and month; these are descriptive summaries of available observations, **not area-weighted statewide estimates or evidence of long-term climate change**.
+
+### Source & reproducibility
+
+Data: `p8105.datasets::ny_noaa`, originally NOAA GHCN-Daily. [Course data description](https://p8105.com/dataset_noaa.html).
+
+Temperatures and precipitation are divided by 10 to convert to °C and mm. Only the scatterplot is sampled (`set.seed(2367)`); the monthly summaries use all eligible 2010 records.
+
+[Back to home](index.html) · [Resume](resume.html)
+
+Row {data-height=360}
+-----------------------------------------------------------------------
+
+### Seasonal temperature | Monthly mean daily maximum (°C)
+
+```{r temperature-line}
+plot_ly(
+  monthly_temperature, x = ~month, y = ~mean_tmax_c,
+  type = "scatter", mode = "lines+markers",
+  line = list(color = "#226c57", width = 3),
+  marker = list(color = "#226c57", size = 7),
+  text = ~paste0(month.name[month], "<br>Mean maximum: ",
+                 round(mean_tmax_c, 1), " °C<br>Observed station-days: ",
+                 format(records, big.mark = ",")),
+  hoverinfo = "text"
+) |>
+  layout(font = plot_font, showlegend = FALSE,
+         xaxis = list(title = "Month (2010)", tickvals = 1:12, ticktext = month.abb),
+         yaxis = list(title = "Mean daily maximum (°C)"),
+         margin = list(l = 65, r = 20, b = 55, t = 15)) |>
+  config(displaylogo = FALSE, responsive = TRUE)
+```
+
+**Reading:** `r month.name[warmest_month]` has the highest monthly mean daily maximum among the available 2010 observations. This is a seasonal comparison within one year.
+
+Row {data-height=430}
+-----------------------------------------------------------------------
+
+### Precipitation | Monthly mean daily rainfall (mm)
+
+```{r precipitation-bar}
+plot_ly(
+  monthly_rain, x = ~month, y = ~mean_precipitation_mm,
+  type = "bar", marker = list(color = "#538598"),
+  text = ~paste0(month.name[month], "<br>Mean daily precipitation: ",
+                 round(mean_precipitation_mm, 2), " mm<br>Observed station-days: ",
+                 format(records, big.mark = ",")),
+  hoverinfo = "text"
+) |>
+  layout(font = plot_font, showlegend = FALSE,
+         xaxis = list(title = "Month (2010)", tickvals = 1:12, ticktext = month.abb),
+         yaxis = list(title = "Mean daily precipitation (mm)", rangemode = "tozero"),
+         margin = list(l = 65, r = 15, b = 55, t = 15)) |>
+  config(displaylogo = FALSE, responsive = TRUE)
+```
+
+**Reading:** `r month.name[wettest_month]` has the highest mean daily precipitation in the observed records. Bars represent daily averages, not monthly totals.
+
+### Daily temperatures | Minimum vs. maximum (°C)
+
+```{r temperature-scatter}
+plot_ly(
+  scatter_data, x = ~tmin_c, y = ~tmax_c,
+  type = "scatter", mode = "markers",
+  marker = list(color = "#b8793b", size = 5, opacity = 0.45),
+  text = ~paste0("Station: ", station, "<br>Date: ", date,
+                 "<br>Minimum: ", tmin_c, " °C<br>Maximum: ", tmax_c, " °C"),
+  hoverinfo = "text"
+) |>
+  layout(font = plot_font, showlegend = FALSE,
+         xaxis = list(title = "Daily minimum (°C)"),
+         yaxis = list(title = "Daily maximum (°C)"),
+         margin = list(l = 60, r = 15, b = 55, t = 15)) |>
+  config(displaylogo = FALSE, responsive = TRUE)
+```
+
+**Reading:** Each dot is a station-day, not a unique station. Warmer daily minima generally coincide with warmer maxima; the plot combines seasonal and geographic variation.

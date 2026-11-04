@@ -7,6 +7,8 @@ navbar:
       href: index.html
     - text: "Resume"
       href: resume.html
+    - text: "Dashboard"
+      href: dashboard.html
   right:
     - text: "GitHub"
       icon: fa-github
@@ -14,12 +16,3 @@ navbar:
     - text: "Email"
       icon: fa-envelope
       href: mailto:zb2367@cumc.columbia.edu
-output:
-  html_document:
-    theme: flatly
-    highlight: textmate
-    css: styles.css
-    self_contained: false
-    lib_dir: site_libs
-    include:
-      after_body: footer.html
