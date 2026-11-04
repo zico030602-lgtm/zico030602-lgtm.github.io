@@ -92,6 +92,10 @@ Explore seasonal temperature and precipitation patterns across New York State we
 
 Hover for details. Drag to zoom and double-click to reset. Plotly's toolbar provides additional controls.
 
+### Main observations
+
+`r month.name[warmest_month]` has the highest monthly mean daily maximum; `r month.name[wettest_month]` has the highest mean daily precipitation. Precipitation bars show daily averages, not monthly totals. In the scatterplot, warmer minima generally coincide with warmer maxima; each dot is a station-day.
+
 ### Coverage & limitations
 
 Maximum temperature is missing in **`r sprintf("%.1f", missing_tmax_pct)`%** of records; precipitation is missing in **`r sprintf("%.1f", missing_rain_pct)`%**. Missing values are omitted separately for each chart, never replaced with zero. Temperature charts exclude **`r sum(invalid_pair)`** records where the minimum exceeds the maximum. Negative precipitation values are excluded.
@@ -129,7 +133,6 @@ plot_ly(
   config(displaylogo = FALSE, responsive = TRUE)
 ```
 
-**Reading:** `r month.name[warmest_month]` has the highest monthly mean daily maximum among the available 2010 observations. This is a seasonal comparison within one year.
 
 Row {data-height=430}
 -----------------------------------------------------------------------
@@ -139,7 +142,7 @@ Row {data-height=430}
 ```{r precipitation-bar}
 plot_ly(
   monthly_rain, x = ~month, y = ~mean_precipitation_mm,
-  type = "bar", marker = list(color = "#538598"),
+  type = "bar", textposition = "none", marker = list(color = "#538598"),
   text = ~paste0(month.name[month], "<br>Mean daily precipitation: ",
                  round(mean_precipitation_mm, 2), " mm<br>Observed station-days: ",
                  format(records, big.mark = ",")),
@@ -152,7 +155,6 @@ plot_ly(
   config(displaylogo = FALSE, responsive = TRUE)
 ```
 
-**Reading:** `r month.name[wettest_month]` has the highest mean daily precipitation in the observed records. Bars represent daily averages, not monthly totals.
 
 ### Daily temperatures | Minimum vs. maximum (°C)
 
@@ -172,4 +174,3 @@ plot_ly(
   config(displaylogo = FALSE, responsive = TRUE)
 ```
 
-**Reading:** Each dot is a station-day, not a unique station. Warmer daily minima generally coincide with warmer maxima; the plot combines seasonal and geographic variation.
