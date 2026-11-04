@@ -1,0 +1,78 @@
+---
+title: "Resume"
+---
+
+<p class="eyebrow">ZHEMING BAO / EXPERIENCE &amp; EDUCATION</p>
+
+My experience spans healthcare research, investment analysis, and marketing analytics. I am interested in consulting roles that combine analytical thinking with practical business decisions.
+
+## Education
+
+### Columbia University
+
+<p class="role-meta">Master of Public Health, Health Policy and Management · September 2025–May 2027 (expected)</p>
+
+Second-year MPH student pursuing a certificate in Applied Biostatistics and Data Science.
+
+### Monash University
+
+<p class="role-meta">Undergraduate studies in Financial Econometrics · February 2022–December 2024</p>
+
+Exchange program at the University of Warwick, January–June 2024.
+
+## Professional experience
+
+### China Healthcare Industry Investment Fund
+
+<p class="role-meta">Business Analysis Intern — Strategy · June 2026–Present</p>
+
+- Supported industry due diligence in electric vehicles, power batteries, and cross-border textiles by organizing market, export, and supply-chain data.
+- Developed an evaluation framework for overseas expansion and assessed opportunities in Thailand, Brazil, and the United Arab Emirates.
+- Prepared standardized procedures and materials to support visits, industry research, and business meetings.
+
+### McKinsey & Company
+
+<p class="role-meta">Healthcare Consulting Support — PTA · August–October 2024</p>
+
+- Researched China's overseas direct investment policies, focusing on healthcare investment, compliance, and operating risks.
+- Conducted competitive benchmarking of healthcare products using market, financial, and value-chain information.
+- Used R and Power BI to communicate financial and competitive analysis through visual dashboards.
+
+### Goldman Sachs Asia
+
+<p class="role-meta">Analyst Assistant — PTA · May–July 2024</p>
+
+- Conducted industry research on environmental services and technology, including generative AI and cloud infrastructure.
+- Supported financial modeling, valuation, and ESG portfolio analysis across investment targets.
+- Built Excel and Python templates for portfolio monitoring and risk analysis.
+
+### Amazon
+
+<p class="role-meta">Marketing Assistant — PTA · December 2023–February 2024</p>
+
+- Cleaned sales-order data with SQL and used R for marketing mix modeling, customer segmentation, and market basket analysis.
+- Analyzed advertising performance across social platforms and developed channel optimization recommendations.
+- Supported Kindle marketing planning and compared creative and strategy variants through A/B testing.
+
+## Research & projects
+
+### Game theory for water resource allocation
+
+<p class="role-meta">Project Lead · March–June 2024</p>
+
+Led a four-person team studying agricultural water allocation. Organized agricultural panel data for Shanghai, developed a game-theoretic model, and compared policy scenarios using the Graph Model for Conflict Resolution.
+
+### Application of Game Theory in Option Pricing: A Binomial Tree Model Approach
+
+<p class="role-meta">First Author · 2024</p>
+
+Developed and evaluated a model combining game theory with a binomial pricing framework. The paper was accepted for presentation at the 2024 International Conference on Innovations in Applied Mathematics, Physics and Astronomy (IAMPA 2024).
+
+## Skills & interests
+
+- **Programming:** R, Python (pandas, NumPy, scikit-learn), SQL, Stata, and VBA.
+- **Analytics tools:** Power BI, Tableau, Google Analytics, AppsFlyer, and advanced Excel.
+- **Languages:** Mandarin Chinese (native) and English (professional working proficiency).
+- **Interests:** Basketball and rugby.
+
+<div class="contact-strip"><span>Contact</span><a href="mailto:zb2367@cumc.columbia.edu">zb2367@cumc.columbia.edu</a></div>

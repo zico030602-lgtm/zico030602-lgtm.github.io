@@ -1,0 +1,25 @@
+---
+title: "Zheming Bao"
+---
+
+<div class="hero">
+<p class="eyebrow">PUBLIC HEALTH · DATA · STRATEGY</p>
+<h1>Turning evidence into<br>better decisions.</h1>
+<p class="hero-intro">I'm Zheming Bao, a second-year Master of Public Health student in Health Policy and Management at Columbia University, with an interest in consulting.</p>
+<p class="hero-detail">My background connects econometrics, healthcare research, and business analysis. I enjoy using data to understand complex problems and communicate practical recommendations.</p>
+<div class="hero-actions"><a class="primary-link" href="resume.html">Explore my experience <span aria-hidden="true">↗</span></a><a class="secondary-link" href="mailto:zb2367@cumc.columbia.edu">Get in touch</a></div>
+</div>
+
+## What I bring
+
+<div class="focus-grid">
+<section class="focus-card"><p class="card-number">01 / HEALTH</p><h3>Policy &amp; healthcare</h3><p>Graduate training in health policy and management, with experience researching healthcare markets and cross-border investment policy.</p></section>
+<section class="focus-card"><p class="card-number">02 / ANALYTICS</p><h3>Data-informed insight</h3><p>A foundation in econometrics and hands-on experience with R, Python, SQL, and business intelligence tools.</p></section>
+<section class="focus-card"><p class="card-number">03 / STRATEGY</p><h3>Business problem-solving</h3><p>Experience in industry research, competitive analysis, and marketing analytics, with a career interest in consulting.</p></section>
+</div>
+
+## Beyond the classroom
+
+I have worked on projects in game theory, resource allocation, and option pricing. Outside academic and professional work, I enjoy basketball and rugby.
+
+<div class="contact-strip"><span>Let's connect.</span><a href="mailto:zb2367@cumc.columbia.edu">zb2367@cumc.columbia.edu</a></div>

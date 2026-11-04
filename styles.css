@@ -1,0 +1,35 @@
+:root { --ink: #17352f; --accent: #226c57; --muted: #61726b; --paper: #f7f8f4; --line: #dce4dd; }
+body { background: var(--paper); color: var(--ink); font-family: "Helvetica Neue", Arial, sans-serif; font-size: 17px; line-height: 1.75; }
+.main-container { max-width: 1080px; padding: 0 30px; }
+.navbar { background: var(--ink); border: 0; }
+.navbar-brand { font-size: 16px; font-weight: 700; letter-spacing: .12em; }
+.navbar-default .navbar-nav > li > a { font-size: 14px; }
+a { color: var(--accent); text-underline-offset: 4px; }
+a:hover, a:focus { color: #123d30; text-decoration: underline; }
+a:focus-visible { outline: 3px solid #c4a853; outline-offset: 4px; }
+#header { padding-top: 38px; }
+h1.title { font-size: 42px; font-weight: 600; margin-bottom: 24px; }
+body:has(.hero) #header { display: none; }
+.hero { padding: 78px 0 62px; max-width: 880px; }
+.eyebrow { color: var(--accent); font-size: 12px; letter-spacing: .18em; font-weight: 700; margin-bottom: 24px; }
+.hero h1 { font-family: Georgia, serif; font-size: clamp(42px, 6vw, 72px); line-height: 1.08; letter-spacing: -.04em; margin: 0 0 30px; }
+.hero-intro { font-size: 23px; line-height: 1.55; max-width: 790px; }
+.hero-detail { color: var(--muted); max-width: 740px; }
+.hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 25px; margin-top: 30px; }
+.primary-link { background: var(--ink); color: white; padding: 12px 22px; border-radius: 4px; font-size: 15px; }
+.primary-link:hover, .primary-link:focus { background: var(--accent); color: white; }
+.primary-link span { margin-left: 16px; }
+.secondary-link { font-size: 15px; font-weight: 600; }
+h2 { font-family: Georgia, serif; font-size: 32px; margin-top: 45px; margin-bottom: 25px; padding-top: 28px; border-top: 1px solid var(--line); }
+h3 { font-size: 22px; font-weight: 600; margin-top: 30px; }
+.focus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.focus-card { background: #fff; border: 1px solid var(--line); padding: 25px; border-radius: 6px; }
+.focus-card h3 { margin: 15px 0; font-size: 20px; }
+.focus-card p { font-size: 15px; color: var(--muted); }
+.focus-card .card-number { font-size: 11px; font-weight: 700; letter-spacing: .13em; color: var(--accent); }
+.role-meta { color: var(--muted); font-size: 15px; margin: 8px 0 18px; }
+li { margin-bottom: 8px; }
+.contact-strip { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 25px 0; margin-top: 45px; border-top: 1px solid var(--line); }
+.contact-strip span { font-family: Georgia, serif; font-size: 25px; }
+.site-footer { border-top: 1px solid var(--line); margin-top: 35px; padding: 26px 0 38px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 12px; }
+@media (max-width: 767px) { .main-container { padding: 0 22px; } .hero { padding: 42px 0 30px; } .hero-intro { font-size: 20px; } .focus-grid { grid-template-columns: 1fr; } h1.title { font-size: 36px; } .site-footer { flex-direction: column; } }

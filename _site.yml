@@ -1,0 +1,25 @@
+name: "zheming-bao"
+output_dir: "."
+navbar:
+  title: "ZHEMING BAO"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Resume"
+      href: resume.html
+  right:
+    - text: "GitHub"
+      icon: fa-github
+      href: https://github.com/zico030602-lgtm
+    - text: "Email"
+      icon: fa-envelope
+      href: mailto:zb2367@cumc.columbia.edu
+output:
+  html_document:
+    theme: flatly
+    highlight: textmate
+    css: styles.css
+    self_contained: false
+    lib_dir: site_libs
+    include:
+      after_body: footer.html
